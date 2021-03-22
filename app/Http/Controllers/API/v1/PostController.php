@@ -40,8 +40,6 @@ class PostController extends Controller
         
         // $post = new Post($request->all());        
         // $post->save();
-        
-        // return Post::find($post);
     }
 
     /**
