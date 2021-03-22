@@ -30,10 +30,13 @@ class PostController extends Controller
     {
         $request->validated();
         
-        $post = new Post;
+        // $post = new Post;
+        
         // $post->title = $request->get('title');
         // $post->description = $request->get('description');
-        $post->create($request->only('title', 'description'));        
+        
+        // $post->create($request->only('title', 'description'));        
+        (new Post)->create($request->only('title', 'description'));        
         
         // $post = new Post($request->all());        
         // $post->save();
@@ -59,12 +62,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdatePostRequest $request, $id)
     {
-        $request->validate([
-            'title'=> 'required|max:255',
-            'description'=> 'required|max:255',
-        ]);
+        $request->validated();
         
         $post = Post::find($id);
         $post->update($request->all());
