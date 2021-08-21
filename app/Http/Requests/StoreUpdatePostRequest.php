@@ -28,7 +28,7 @@ class StoreUpdatePostRequest extends FormRequest
             'description'=> 'required|max:255',
         ];
     }
-    
+
     /**
      * Get the validation messages that apply to the request.
      *
@@ -36,11 +36,12 @@ class StoreUpdatePostRequest extends FormRequest
      */
     public function messages()
     {
+//        Вынес сообщение в resources/lang/ru/validation.php
         return [
-            // 'required' => 'Поле :attribute обязательно к заполнению.',
+//             'required' => 'Поле :attribute обязательно к заполнению.',
         ];
     }
-    
+
     /**
      * Get the validation attributes that apply to the request.
      *

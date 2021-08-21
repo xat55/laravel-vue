@@ -4,49 +4,39 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdatePostRequest;
-use Illuminate\Http\Request;
+use Exception;
 use App\Models\Post;
+use Illuminate\Http\Response;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         return Post::latest('id')->paginate(2);
-        // return Post::oldest('id')->get();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreUpdatePostRequest $request
+     * @param Post $post
+     * @return Response
      */
-    public function store(StoreUpdatePostRequest $request)
+    public function store(StoreUpdatePostRequest $request, Post $post)
     {
-        $request->validated();
-        
-        // $post = new Post;
-        
-        // $post->title = $request->get('title');
-        // $post->description = $request->get('description');
-        
-        // $post->create($request->only('title', 'description'));        
-        (new Post)->create($request->only('title', 'description'));        
-        
-        // $post = new Post($request->all());        
-        // $post->save();
+        return $post->create($request->validated());
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function show($id)
     {
@@ -56,26 +46,24 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreUpdatePostRequest $request
+     * @param Post $post
+     * @return bool
      */
-    public function update(StoreUpdatePostRequest $request, $id)
+    public function update(StoreUpdatePostRequest $request, Post $post)
     {
-        $request->validated();
-        
-        $post = Post::find($id);
-        $post->update($request->all());
+        return $post->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return bool
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        Post::destroy($id);
+        return $post->delete();
     }
 }
