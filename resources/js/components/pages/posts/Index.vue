@@ -69,7 +69,7 @@
                 <a class="page-link" href="#">Назад</a>
             </li>
 
-            <li @click.prevent="" class="page-item">
+            <li class="page-item">
                 <a class="page-link" href="">
                     Страница {{ pagination.current_page }} из {{ pagination.last_page }}
                 </a>
